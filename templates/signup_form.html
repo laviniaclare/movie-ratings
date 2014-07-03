@@ -1,0 +1,36 @@
+<html>
+    <div id='signup'>
+        <form class="form-signup" method="post">
+           <h2 class="form-signup-heading">Register Your Account</h2>
+            <input type="email" name="email" class="form-control" placeholder="Email Address" required autofocus/>
+            <br></br>
+            <input type="password" name="password" class="form-control" placeholder="Password" required/>
+            <br></br>
+            <input type="text" name="age" class="form-control" placeholder="Please enter your age"/>
+            <br></br>
+            <input type="text" name="zip" class="form-control" placeholder="Please enter your zipcode"/>
+            <br></br>
+            <select type="dropdownlist" name="occupation">
+                <option value=none> Occupation</option>
+                <option value="Techi Gentrifier">Techi Gentrifier
+                </option>
+                <option value="Nihilistic Child"> Nihilistic Child
+                </option>
+                <option value="Student"> Student
+                </option>
+                <option value='homemaker'> Homemaker
+                </option>
+                <option value="other"> Other
+                </option>
+            </select>
+            <br></br>
+            What's your gender?
+            <input type="radio" name="gender" value='M' checked=checked/>M
+            <input type="radio" name="gender" value='F' checked=checked/>F
+            <input type="radio" name="gender" value='Other' checked=checked/>Other
+            <input type="radio" name="gender" value='none' checked=checked/>None of your goddamned business.
+            <br></br>
+            <button type="btn btn-lg btn-primary btn-block" type="submit">Submit Form</button>
+        </form>
+    </div>
+</html>
