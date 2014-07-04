@@ -34,6 +34,10 @@ class User(Base):
         Session.add(self)
         Session.commit()
 
+def get_all_users():
+    all_users=Session.query(User).limit(20).all()
+    return all_users
+
 def user_by_email(email, password):
     user = Session.query(User).filter_by(email=email).filter_by(password=password).first()
     return user
@@ -57,6 +61,9 @@ class Rating(Base):
     user = relationship("User", backref = backref("ratings", order_by = id))
     movie = relationship("Movie", backref = backref("ratings", order_by = id))
 
+    def add_rating(self):
+        Session.add(self)
+        Session.commit()
 
 
 ### End class declarations

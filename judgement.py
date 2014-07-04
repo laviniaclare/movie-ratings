@@ -31,20 +31,13 @@ def add_user():
 @app.route("/", methods=["POST"])
 def process_login():
     email = request.form['email']
-    print email
     password=request.form['password']
-    print password
     user = model.user_by_email(email, password) #add get user by email to model
-    print 'almost to the loop'
     if user:
-        print "user=true!"
-        print user.email
         session['user'] = [user.email, user.password]
-        print session
         flash("Successfully logged in")
-        return redirect('/user_list')
+        return redirect('/home_page')
     else:
-        print "No user"
         flash("Account not found.")
         return redirect("/")
 
@@ -54,10 +47,49 @@ def process_logout():
     flash("Successfully logged out")
     return redirect("/")
 
-@app.route('/user_list')
-def user_list():
-    return render_template('user_list.html')
+@app.route('/home_page')
+def home_page():
+    user=model.user_by_email(session['user'][0], session['user'][1])
+    user_id=user.id
+    ratings=model.Session.query(model.Rating).filter_by(user_id=user_id).all()
+    return render_template('home_page.html', ratings=ratings)
 
+@app.route('/user_list') 
+def user_list():
+    all_users=model.get_all_users()
+    return render_template('user_list.html', all_users=all_users)
+
+@app.route('/movie_list')
+def movie_list():
+    return render_template('movie_list.html')
+
+@app.route('/users_ratings/<int:id>')
+def display_users_ratings(id):
+    ratings=model.Session.query(model.Rating).filter_by(user_id=id).all()
+    return render_template('users_ratings.html', ratings=ratings, id=id)
+
+@app.route('/rate_movie/<int:id>', methods = ['GET'])
+def rate_movie_form(id):
+    movie=model.Session.query(model.Movie).filter_by(id= id).one()
+    print movie.name
+    return render_template('rate_movie.html', movie = movie, id = id)
+
+@app.route('/rate_movie/<int:id>', methods=['POST'])
+def rate_movie(id):
+    #Add an if statement to see if they've rated it before so they
+    #can't rate the same movie twice.
+    stars=request.form['rating']
+    print stars
+    user=model.user_by_email(session['user'][0], session['user'][1])
+    print user
+    user_id=user.id
+    print user_id
+    movie_id=id
+    print movie_id
+    new_rating=model.Rating(rating=stars, movie_id=movie_id, user_id=user_id)
+    print new_rating
+    new_rating.add_rating()
+    return redirect('/home_page')
 
 
 if __name__ == "__main__":

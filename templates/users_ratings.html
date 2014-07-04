@@ -1,0 +1,13 @@
+<html>
+    <head>
+    </head>
+
+    <body>
+        <h2>User {{ id }} has rated: <br></br></h2>
+        {% for rating in ratings %}
+             Title: <a href='/rate_movie/{{ rating.movie_id }}'>{{ rating.movie.name }}</a>/  Stars: {{ rating.rating }} <bg></br>
+                <!-- movie name should be a link that allows user to add their own rating or something at some point -->
+        {% endfor %}
+
+    </body>
+</html>

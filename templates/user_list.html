@@ -1,20 +1,10 @@
 <html>
-<!-- {% for user in users %}
-<h2> User {{ user.id }}, age {{ user.age }} has {{ user.ratings|length }} ratings </h2>
-{% endfor %} -->
     <body>
         <a href='/'><button type="btn btn-lg btn-primary btn-block">Logout!</button></a>
-        <h1>WAZZUP!</h1> 
-        {% for user in users %}
-        <h2> User {{ user.id }}, age {{ user.age }} has {{ user.ratings|length }} ratings </h2>
+        <h1>WAZZUP! There will be a shit ton of users here someday! Yeah!</h1>
+        {{ users }}
+        {% for user in all_users %}
+        <h4><a href='/users_ratings/{{ user.id }}'>User {{ user.id }}, age {{ user.age }} has {{ user.ratings|length }} ratings <br></br></h4></a>
         {% endfor %}
     </body>
-<!-- <form class="form-signin" method="POST">
-    <h2 class="form-signin-heading">Please Sign In</h2>
-    <h3>Don't have an account? Signup <a href='/signup_form'>here.</a></h3>
-    <input type="email" name="email" class="form-control" placeholder="Email Address" required autofocus />
-    <input type="password" name="password" class="form-control" placeholder="Password" required />
-    <button type="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
-</form> -->
-
 </html>

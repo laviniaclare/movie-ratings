@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <a href='/'><button type="btn btn-lg btn-primary btn-block">Logout!</button></a>
+        <h1>WAZZUP!</h1> 
+        <a href='/user_list'>All Users</a>
+        <a href='/movie_list'>All Movies</a><br></br>
+        <h3> Your Ratings </h3>
+        {% for rating in ratings %}
+            Title: {{ rating.movie.name }}/  Stars: {{ rating.rating }}<br></br> 
+        {% endfor %}
+    </body>
+</html>
